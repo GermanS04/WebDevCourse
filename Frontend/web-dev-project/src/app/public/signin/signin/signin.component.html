@@ -1,0 +1,27 @@
+
+
+<main class="signin-main">
+    <form [formGroup]="signinForm" (ngSubmit)="onSubmit()" class="form-main">
+        <p class="form-title">
+            Sign In
+        </p>
+        <input 
+            type="email" 
+            formControlName="email" 
+            class="form-input" 
+            placeholder="Email@example.com"
+        >
+        <input 
+            type="password" 
+            formControlName="password" 
+            class="form-input" 
+            placeholder="Password"
+        >
+        <input 
+            type="submit" 
+            [disabled]="!signinForm.valid" 
+            class="form-submit"
+        >
+
+    </form>
+</main>
