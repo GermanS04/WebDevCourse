@@ -1,0 +1,20 @@
+<nav class="navbar">
+    <ul class="navbar-buttons-list">
+      <!-- Left-aligned items -->
+      <div class="nav-group">
+        <li>
+          <a routerLink="/home">Home</a>
+        </li>
+        <li>
+          <a routerLink="/about">About</a>
+        </li>
+      </div>
+  
+      <!-- Right-aligned logout -->
+      <li class="logout-item">
+        <a (click)="logout()" class="logout-button">
+          Logout
+        </a>
+      </li>
+    </ul>
+  </nav>
