@@ -1,0 +1,10 @@
+header app-navbar {
+  height: var(--navbar-height);
+}
+
+.main {
+  width: 100vw;
+  min-height: calc(100vh - var(--navbar-height));
+  margin: 0;
+  padding: 0;
+}
