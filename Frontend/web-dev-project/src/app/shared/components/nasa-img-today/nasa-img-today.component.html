@@ -1,0 +1,30 @@
+<div class="nasa-card">
+    <div class="image-container">
+      <a [href]="nasaData.hdurl" target="_blank" rel="noopener noreferrer">
+        <img [src]="nasaData.url" [alt]="nasaData.title" class="nasa-image">
+      </a>
+    </div>
+  
+    <div class="content">
+      <h2 class="title">{{ nasaData.title }}</h2>
+      
+      <div class="meta">
+        <span class="date">{{ nasaData.date | date:'fullDate' }}</span>
+        <span *ngIf="nasaData.copyright" class="copyright">
+          © {{ nasaData.copyright }}
+        </span>
+      </div>
+  
+      <p class="explanation">
+        {{ truncatedExplanation }}
+      </p>
+  
+      <button 
+        *ngIf="nasaData.explanation && nasaData.explanation.length > maxLength"
+        class="see-more"
+        (click)="toggleExpand()"
+      >
+        {{ isExpanded ? 'See less' : 'See more' }}
+      </button>
+    </div>
+  </div>
