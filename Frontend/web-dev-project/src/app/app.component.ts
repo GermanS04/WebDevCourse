@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from "./shared/components/navbar/navbar.component";
-import { AuthService } from './core/services/auth.service';
-import { Observable } from 'rxjs';
+import { AuthService } from './core/services/auth/auth.service';
 
 @Component({
   selector: 'app-root',

@@ -1,1 +1,18 @@
-<p>home works!</p>
+<main class="home-container">
+    <h1>NASA Astronomy Picture of the Day</h1>
+
+    <div *ngIf="loading" class="loading">
+        Loading NASA images...
+    </div>
+
+    <div *ngIf="!loading && nasaData.length > 0" class="image-grid">
+        <app-nasa-img-today
+        *ngFor="let item of nasaData"
+        [nasaData]="item"
+        ></app-nasa-img-today>
+    </div>
+
+    <div *ngIf="!loading && nasaData.length === 0" class="no-data">
+        No images available
+    </div>
+</main>
