@@ -6,7 +6,7 @@ import { SigninComponent } from './features/signin/signin/signin.component';
 import { AuthGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
-    { path: '', component: SigninComponent },
+    { path: '', redirectTo: 'signin', pathMatch: 'full' },
     { path: 'signin', component: SigninComponent },
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'about', component: AboutComponent, canActivate: [AuthGuard] }

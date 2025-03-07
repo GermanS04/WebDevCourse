@@ -1,6 +1,7 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,8 @@ export class AuthService {
     email: "dummy@example.com",
     password: "1234"
   };
+
+  private authStatus = new BehaviorSubject<boolean>(this.isLoggedIn());
 
   constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object){}
 
@@ -24,6 +27,7 @@ export class AuthService {
 
   login(){
     localStorage.setItem('fakeToken', 'dummy-token-123');
+    this.authStatus.next(true);
     this.router.navigate(['/home'])
   }
 
@@ -37,7 +41,12 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('fakeToken');
+    this.authStatus.next(false);
     this.router.navigate(['/signin']);
+  }
+
+  getAuthStatus() {
+    return this.authStatus.asObservable();
   }
 }
 
