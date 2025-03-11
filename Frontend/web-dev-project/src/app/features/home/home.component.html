@@ -1,18 +1,33 @@
 <main class="home-container">
     <h1>NASA Astronomy Picture of the Day</h1>
 
-    <div *ngIf="loading" class="loading">
-        Loading NASA images...
+    <div class="search-bar">
+        <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            placeholder="Search..."
+            (input)="search()"
+        />
     </div>
 
-    <div *ngIf="!loading && nasaData.length > 0" class="image-grid">
+    <div *ngIf="loading" class="loading">
+        Loading...
+    </div>
+
+    <div *ngIf="!loading && filteredData.length > 0" class="image-grid">
         <app-nasa-img-today
-        *ngFor="let item of nasaData"
-        [nasaData]="item"
+            *ngFor="let item of paginatedData"
+            [nasaData]="item"
         ></app-nasa-img-today>
     </div>
 
-    <div *ngIf="!loading && nasaData.length === 0" class="no-data">
+    <div *ngIf="!loading && filteredData.length === 0" class="no-data">
         No images available
+    </div>
+
+    <div *ngIf="!loading && filteredData.length > 0" class="pagination-controls">
+        <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+        <span>Page {{ currentPage }} of {{ totalPages }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
     </div>
 </main>
