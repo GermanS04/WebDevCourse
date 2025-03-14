@@ -89,3 +89,10 @@
     font-weight: bold;
     flex-shrink: 0;
 }
+
+.options {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+    row-gap: 0.25rem;
+}
