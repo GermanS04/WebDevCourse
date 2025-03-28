@@ -1,22 +1,30 @@
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-signup',
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
   signupForm: FormGroup;
+  private apiUrl = environment.apiSignUp;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private http: HttpClient) {
     this.signupForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       birthdate: ['', [Validators.required, this.validateBirthdate]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+      password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
 
@@ -33,8 +41,25 @@ export class SignupComponent {
 
   onSubmit() {
     if (this.signupForm.valid) {
-      // Handle form submission
+      const formData = {
+        name: this.signupForm.value.name,
+        email: this.signupForm.value.email,
+        birth: this.formatDate(this.signupForm.value.birthdate),
+        password: this.signupForm.value.password,
+      };
+
+      this.http.post(this.apiUrl, formData).subscribe({
+        next: (response) => {},
+        error: (err) => {},
+      });
       console.log(this.signupForm.value);
+    } else {
+      this.signupForm.markAllAsTouched();
     }
+  }
+
+  private formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toISOString().split('T')[0];
   }
 }
