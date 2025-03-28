@@ -32,9 +32,9 @@ export class SigninComponent {
     if (this.signinForm.valid) {
       const { email, password } = this.signinForm.value;
 
-      if (this.authService.validateCredentials(email, password)) {
-        this.authService.login();
-      }
+      this.authService.validateCredentials(email, password).subscribe({
+        next: (response) => {},
+      });
     }
   }
 }
