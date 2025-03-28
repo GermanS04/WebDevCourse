@@ -79,7 +79,7 @@ router.post(API_ROUTES.USERS.FORGOT_PASS, async (req, res) => {
     expiresIn: JWT_ENV.RESET_TIME,
   });
 
-  const resetLink = `${CLIENT_ENV.URL}/reset-password?token=${resetToken}`;
+  const resetLink = `${CLIENT_ENV.URL}/resetpassword?token=${resetToken}`;
 
   const transporter = require("../config/email");
   await transporter.sendMail({
